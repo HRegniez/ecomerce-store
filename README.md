@@ -40,3 +40,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 2. create database
     - install prisma and init with sqLite
     - create models in schema.prisma
+    - generate sqLite database
