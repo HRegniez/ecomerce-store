@@ -41,3 +41,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     - install prisma and init with sqLite
     - create models in schema.prisma
     - generate sqLite database
+3. page: Admin dashboard
+    - install shadcn/ui
