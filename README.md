@@ -63,6 +63,15 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
         1. PageHeader (_components/PageHeader.tsx => next.js ignores this folder)
         2. Button (shadcn/ui)
         3. Products Table (shadcn/ui)
-
+3. page: Admin Products / new
+    - create page
+    - create components
+        1. PageHeader
+        2. ProductForm
+            - Label (shadcn/ui)
+            - Input (shadcn/ui)
+            - Button (shadcn/ui)
+        3. actions (_actions)
+            
 
         
