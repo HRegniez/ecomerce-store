@@ -49,6 +49,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
         3. Dashboard
             - get sales data
             - display sales data
+            - get customers data
+            - display customers data
         4. format sales data
             - formatCurrency
             - formatNumber
+        

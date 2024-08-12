@@ -14,11 +14,37 @@ async function getSalesData() {
     }
 }
 
+async function getCustomersData() {
+    const [userCount, orderData] = await Promise.all([
+        db.user.count(),
+        db.order.aggregate({
+            _sum: {pricePaid: true},
+        })
+    ])
+    
+    return {
+        userCount,
+        averageValuePerUser: userCount === 0 ? 0 : (orderData._sum.pricePaid || 0) / userCount / 100
+    }
+}
+
 export default async function AdminDashboard() {
-    const salesData = await getSalesData()
+    const [salesData, customersData] = await Promise.all([
+        getSalesData(),
+        getCustomersData()
+    ])
 
     return <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <DashboardCard title="Sales" description={formatNumber(salesData.numberOfSales)} body={formatCurrency(salesData.amount)} />
+        <DashboardCard 
+            title="Sales" 
+            description={`${formatNumber(salesData.numberOfSales)} Orders`} 
+            body={formatCurrency(salesData.amount)} 
+        />
+        <DashboardCard 
+            title="Customers" 
+            description={`${formatCurrency(customersData.averageValuePerUser)} Average Value`} 
+            body={formatNumber(customersData.userCount)} 
+        />
     </div>
 }
 
@@ -33,7 +59,7 @@ function DashboardCard({title, description, body}: DashboardCardProps) {
         <Card>
             <CardHeader>
                 <CardTitle>
-                    <h1>{title}</h1>
+                    <h4>{title}</h4>
                 </CardTitle>
                 <CardDescription>
                     {description}
