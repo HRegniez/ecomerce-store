@@ -72,6 +72,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
             - Input (shadcn/ui)
             - Button (shadcn/ui)
         3. actions (_actions)
+            - addProduct
+                1. validate data (zod)
+                2. create product (prisma)
+                3. redirect to /admin/products (next/navigation)
             
 
         

@@ -6,12 +6,13 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { formatCurrency } from "@/lib/formatters"
+import { createProduct } from "@/app/admin/_actions/products"
 
 export default function ProductForm() {
     const [priceInCents, setPriceInCents] = useState<number>()
 
     return (
-        <form action className="space-y-8">
+        <form action={createProduct} className="space-y-8">
             <div className="space-y-2">
                 <Label htmlFor="name">Name</Label>
                 <Input type="text" name="name" id="name" placeholder="Product Name" required />
