@@ -51,7 +51,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
             - display sales data
             - get customers data
             - display customers data
+            - get products data
+            - display products data
         4. format sales data
             - formatCurrency
             - formatNumber
+        
         
