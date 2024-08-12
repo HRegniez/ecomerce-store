@@ -45,7 +45,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     - install shadcn/ui
     - create components
         1. Nav
-        2. DashboardCard
+        2. DashboardCard (shadcn/ui)
         3. Dashboard
             - get sales data
             - display sales data
@@ -56,5 +56,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
         4. format sales data
             - formatCurrency
             - formatNumber
-        
+        5. loading page
+2. page: Admin Products
+    - create page
+    - create components
+        - PageHeader
+        - Button (shadcn/ui)
         
