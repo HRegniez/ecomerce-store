@@ -43,3 +43,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     - generate sqLite database
 3. page: Admin dashboard
     - install shadcn/ui
+    - create components
+        1. Nav
+        2. DashboardCard
+        3. Dashboard
+            - get sales data
+            - display sales data
