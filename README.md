@@ -125,9 +125,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
                 3. redirect to /admin/products (next/navigation)
             - toggleProductAvailability (toggle product availability)
                 1. update product (prisma)
-
+                2. redirect to /admin/products (next/navigation)
             - deleteProduct (delete product from database)
                 1. delete product (prisma)
+                2. redirect to /admin/products (next/navigation)
 
             
 

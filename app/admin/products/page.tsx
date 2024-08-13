@@ -5,7 +5,7 @@ import Link from "next/link";
 import db from "../../../src/db/db"
 import { CheckCircle2, MoreVertical, XCircle } from "lucide-react";
 import { formatCurrency, formatNumber } from "../../../lib/formatters";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { ActiveToggleDropdownItem, DeleteDropdownItem } from "./_components/ProductActions";
 
 export default function AdminProductsPage() {
@@ -73,7 +73,7 @@ async function ProductTable() {
                             )}
                         </TableCell>
                         <TableCell>{product.name}</TableCell>
-                        <TableCell>{formatCurrency(product.price)}</TableCell>
+                        <TableCell>{formatCurrency(Number(product.price) /100)}</TableCell>
                         <TableCell>{formatNumber(product._count.orders)}</TableCell>
                         <TableCell>
                             <DropdownMenu>
@@ -89,8 +89,8 @@ async function ProductTable() {
                                         <Link href={`/admin/products/${product.id}/edit`}>Edit</Link>
                                     </DropdownMenuItem>
                                     <ActiveToggleDropdownItem id={product.id} isAvailable={product.isAvailable} />
+                                    <DropdownMenuSeparator/>
                                     <DeleteDropdownItem id={product.id} disabled={product._count.orders > 0} />
-
                                 </DropdownMenuContent>                        
                             </DropdownMenu>
                         </TableCell>
