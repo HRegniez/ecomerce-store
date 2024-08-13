@@ -66,4 +66,7 @@ export async function deleteProduct(id: string) {
     })
     if (product == null) {
         return notFound()
-}}
+    }
+    await fs.unlink(product.fileUrl)
+    await fs.unlink(`public/${product.imageUrl}`)
+}
