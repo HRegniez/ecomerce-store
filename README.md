@@ -63,6 +63,52 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
         1. PageHeader (_components/PageHeader.tsx => next.js ignores this folder)
         2. Button (shadcn/ui)
         3. Products Table (shadcn/ui)
+        4. DropdownMenu (shadcn/ui)
+            - added DropdownMenuItemVariant to enhance the styling options for dropdown menu items
+              - Created a new cva (class variance authority) for DropdownMenuItem
+              - Added support for 'default' and 'destructive' variants
+              - Implemented in dropdown-menu.tsx as follows:
+
+              ```typescript
+              const DropdownMenuItemVariant = cva(
+                "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+                {
+                  variants: {
+                    variant: {
+                      default: "focus:bg-accent focus:text-accent-foreground",
+                      destructive:
+                        "focus:bg-destructive focus:text-destructive-foreground text-destructive",
+                    },
+                  },
+                  defaultVariants: {
+                    variant: "default",
+                  },
+                }
+              )
+              ```
+
+              - Updated DropdownMenuItem to use the new variant:
+
+              ```typescript
+              const DropdownMenuItem = React.forwardRef<
+                React.ElementRef<typeof DropdownMenuPrimitive.Item>,
+                React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> & {
+                  inset?: boolean,
+                  variant?: "default" | "destructive"
+                }
+              >(({ className, inset, variant, ...props }, ref) => (
+                <DropdownMenuPrimitive.Item
+                  ref={ref}
+                  className={cn(
+                    DropdownMenuItemVariant({ variant, className }),
+                    inset && "pl-8"
+                  )}
+                  {...props}
+                />
+              ))
+              ```
+
+              This allows for more flexible styling of dropdown menu items, particularly useful for actions like delete that require a destructive style.
     - get & add products data to table
 3. page: Admin Products / new
     - create page
