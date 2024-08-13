@@ -63,6 +63,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
         1. PageHeader (_components/PageHeader.tsx => next.js ignores this folder)
         2. Button (shadcn/ui)
         3. Products Table (shadcn/ui)
+    - get & add products data to table
 3. page: Admin Products / new
     - create page
     - create components
@@ -72,10 +73,16 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
             - Input (shadcn/ui)
             - Button (shadcn/ui)
         3. actions (_actions)
-            - addProduct
+            - addProduct (add product to database)
                 1. validate data (zod)
                 2. create product (prisma)
                 3. redirect to /admin/products (next/navigation)
+            - toggleProductAvailability (toggle product availability)
+                1. update product (prisma)
+
+            - deleteProduct (delete product from database)
+                1. delete product (prisma)
+
             
 
         

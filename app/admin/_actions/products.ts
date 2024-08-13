@@ -3,7 +3,7 @@
 import { z } from "zod"
 import db from "../../../src/db/db"
 import fs from "fs/promises"
-import { redirect } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 
 
 const fileSchema = z.instanceof(File, { message: "File is required" })
@@ -17,7 +17,7 @@ const addSchema = z.object({
     image: imageSchema.refine((file) => file.size > 0, "Required" ),
 })
 
-export async function createProduct(formData: FormData) {
+export async function createProduct(prevStat: unknown, formData: FormData) {
     const result = addSchema.safeParse( Object.fromEntries(formData.entries()))
     if(result.success === false) {
         return result.error.formErrors.fieldErrors
@@ -31,10 +31,11 @@ export async function createProduct(formData: FormData) {
 
     await fs.mkdir("public/products", { recursive: true })
     const imagePath = `products/${crypto.randomUUID()}-${data.image.name}`
-    await fs.writeFile(`public${imagePath}`, Buffer.from(await data.image.arrayBuffer()))
+    await fs.writeFile(`public/${imagePath}`, Buffer.from(await data.image.arrayBuffer()))
 
     await db.product.create({
         data: {
+            isAvailable: false,
             name: data.name,
             price: data.price,
             description: data.description,
@@ -45,3 +46,24 @@ export async function createProduct(formData: FormData) {
 
     redirect("/admin/products")
 }
+
+export async function toggleProductAvailability(id: string, isAvailable: boolean) {
+    await db.product.update({
+        where: {
+            id
+        },
+        data: {
+            isAvailable
+        }
+    })
+}
+
+export async function deleteProduct(id: string) {
+    const product = await db.product.delete({
+        where: {
+            id
+        }
+    })
+    if (product == null) {
+        return notFound()
+}}
