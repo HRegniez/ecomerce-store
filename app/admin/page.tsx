@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import db from "@/src/db/db";
+import db from "@/db/db";
 import { formatCurrency, formatNumber } from "@/lib/formatters";
 
 async function getSalesData() {

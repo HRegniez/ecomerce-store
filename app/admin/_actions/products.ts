@@ -1,7 +1,7 @@
 "use server"
 
 import { z } from "zod"
-import db from "../../../src/db/db"
+import db from "@/db/db"
 import fs from "fs/promises"
 import { notFound, redirect } from "next/navigation"
 
