@@ -129,6 +129,28 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
             - deleteProduct (delete product from database)
                 1. delete product (prisma)
                 2. redirect to /admin/products (next/navigation)
+            - downloadProduct
+                1. get product (prisma)
+                2. redirect to /admin/products/[id]/download (next/navigation)
+                3. download product (next/server)
+        4. middleware: check if user is admin
+          - create middleware.ts
+          - create isAdmin function
+            1. get authHeader
+              - Authorization: Basic <username>:<password>
+            2. if no authHeader, return false
+              - return new NextResponse("Unauthorized", { status: 401, headers: { "WWW-Authenticate": "Basic" } })
+            3. if authHeader, decode username and password
+              - [username, password] = Buffer.from(authHeader.split(" ")[1], "base64").toString().split(":")
+            4. if username and password are correct, return true
+              - return username === process.env.ADMIN_USERNAME && await isValidPassword(password, process.env.HASHED_ADMIN_PASSWORD as string)
+            5. if not, return false
+              - return false
+          - create config
+            1. matcher: /admin/:path*
+            2. middleware: check if user is admin
+            3. if not admin, redirect to /login (next/navigation)
+
 
             
 
