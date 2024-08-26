@@ -7,14 +7,14 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { useFormState, useFormStatus } from "react-dom"
 import { formatCurrency } from "@/lib/formatters"
-import { createProduct } from "@/app/admin/_actions/products"
+import { createProduct, updateProduct } from "@/app/admin/_actions/products"
 import { Product } from "@prisma/client"
 import Image from "next/image"
 
 
 
-export default function ProductForm({ product }: { product: Product | null }) {
-    const [error, action] = useFormState(createProduct, {})
+export default function ProductForm({ product }: { product?: Product | null }) {
+    const [error, action] = useFormState(product == null ? createProduct : updateProduct.bind(null, product.id), {})
     const [priceInCents, setPriceInCents] = useState<number | undefined>(Number(product?.price || 0))
 
     return (
